@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"os"
+	"strings"
 )
 
 func randomizer() string {
@@ -45,12 +47,33 @@ func checkAnswer(input string) {
 		fmt.Println("You Win")
 	default:
 		fmt.Println("Please input valid value!")
+		os.Exit(1)
 	}
 }
 
 func main() {
-	fmt.Println("Choose Rock, Paper, or Scissors!")
-	var input string
-	fmt.Scan(&input)
-	checkAnswer(input)
+
+	var play string
+	fmt.Println("Do you want to play this game?(Y/N)")
+	fmt.Scan(&play)
+
+Play:
+	if strings.ToUpper(play) == "Y" {
+		fmt.Println("Choose Rock, Paper, or Scissors!")
+		var input string
+		fmt.Scan(&input)
+		checkAnswer(input)
+
+		var loop string
+		fmt.Println("You want to play again?(Y/N)")
+		fmt.Scan(&loop)
+		if strings.ToUpper(loop) == "Y" {
+			goto Play
+		} else {
+			fmt.Println("Thanks for playing this Game")
+			return
+		}
+	} else {
+		fmt.Println("Thanks for have been cloning this program")
+	}
 }
